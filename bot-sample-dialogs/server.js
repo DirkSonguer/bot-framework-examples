@@ -1,10 +1,9 @@
 /* -------------------------------------------------------------------- */
-// bot-sample-prompts
+// bot-sample-dialogs
 // A simple example for the Microsoft Bot Framework using promts.
 //
-// This will show you a simple bot that interacts with the user via
-// several types of promts. Promts are messages by bots, which then
-// wait for user interaction and proceed to the next waterfall step.
+// This will show you a simple bot that utlisises dialogs to guide the
+// user through the conversation.
 //
 // Author: dirk@songuer.de
 // Link: https://github.com/DirkSonguer/bot-framework-examples
