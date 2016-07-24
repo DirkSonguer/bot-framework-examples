@@ -12,6 +12,8 @@ If you want to know more about these examples, please check: http://randomdev.tu
 
 ## Samples
 
+* _bot-sample-cards_: This will show you a simple bot that utlisises cards to send rich information to a user.
+Cards provide flexible layouts that might contain images, titles, subtitles, text and action buttons.
 * _bot-sample-dialogs_: This will show you a simple bot that utlisises dialogs to guide the user
 through the conversation.
 * _bot-sample-intentdialogs_: This will show you a simple bot that utlisises intent dialogs to understand
