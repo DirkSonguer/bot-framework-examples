@@ -1,14 +1,16 @@
 /* -------------------------------------------------------------------- */
-// bot-sample-dialogs
-// A simple example for the Microsoft Bot Framework using dialogs.
+// bot-sample-intentdialogs
+// A simple example for the Microsoft Bot Framework using intent dialogs.
 //
-// This will show you a simple bot that utlisises dialogs to guide the
-// user through the conversation.
+// This will show you a simple bot that utlisises inten dialogs to
+// understand and guide the user through the conversation. IntendDialogs
+// can be called based on matching the input of the user against
+// regular expressions.
 //
 // Author: dirk@songuer.de
 // Link: https://github.com/DirkSonguer/bot-framework-examples
 //
-// See https://docs.botframework.com/en-us/node/builder/chat/dialogs/
+// See https://docs.botframework.com/en-us/node/builder/chat/IntentDialog/
 //
 // If you want a good generic example on how to start with the ms bot
 // framework, you should also have a look at the echobot example from
@@ -67,54 +69,44 @@ var bot = new builder.UniversalBot(connector);
 // management page of your bot.
 server.post('/api/messages', connector.listen());
 
-// We use a standard dialog based bot. When the user starts interacting with
-// the bot, the first step of the root dialog will be called.
-// See https://docs.botframework.com/en-us/node/builder/chat/dialogs/
-bot.dialog('/', [
-    function (session, args, next) {
-        // Offer a way to reset the name stored in the session. This checks
-        // if the user has entered "reset". If so, then delete the value
-        // in session.userData.name so that the bot asks again.
-        if (session.message.text == 'reset') {
-            session.userData.name = '';
-        }
+// We use an intent dialog based bot. When the user starts interacting with
+// the bot, the root dialog will be called. With an intent dialog, regular
+// expressions can be defined, which if they match call respective dialogs.
+// onDefault acts as a closure that will be called if none of the defined
+// matches hit.
+// See https://docs.botframework.com/en-us/node/builder/chat/IntentDialog/
+bot.dialog('/', new builder.IntentDialog()
+    .matches(/^hi/i, '/welcome')
+    .matches(/your name/i, '/botname')
+    .matches(/my name/i, '/username')
+    .onDefault(builder.DialogAction.send("I'm sorry, I didn't understand. You can ask me for my name and tell me yours."))
+);
 
-        // Check if the user name is stored in the session
-        if (!session.userData.name) {
-            // If the name is unknown, then jump to the /profile dialog
-            // to let the user enter it.
-            session.beginDialog('/profile');
-        } else {
-            // If the user name is stored in the session, then continue
-            // to the next step in the waterfall.
-            next();
-        }
-    },
-    function (session, results) {
-        // Acknowledge the users name from the session
-        session.send('Hello ' + session.userData.name + '!');
+// The user message matched /^hi/i
+bot.dialog('/welcome', [
+    function (session) {
+        // Simple text reply back to the user
+        session.send('Hello.');
+        session.endDialog();
     }
 ]);
 
-// Create a new dialog called /profile. Dialogs can call each other with
-// session.beginDialog('/dialog_name');
-bot.dialog('/profile', [
+// The user message matched /^your name/i
+// This is to catch phrases like "What's your name?"
+bot.dialog('/username', [
     function (session) {
-        // Simple text prompt. This will show a message and wait for user
-        // input. The entire response of the user will be handed to the
-        // next waterfall step.
-        // See https://docs.botframework.com/en-us/node/builder/chat/prompts/
-        builder.Prompts.text(session, 'Hi! What is your name?');
-    },
-    function (session, results) {
-        // Store the users name in the session. Note that everything you store
-        // in session.userData will be persistent for the entire chat session
-        // with the current user. Also note that the length of a session
-        // depends on the respective channel. Some might run out, others have
-        // to be reset programatically.
-        session.userData.name = results.response;
+        // Simple text reply back to the user
+        session.send('Nice to meet you!');
+        session.endDialog();
+    }
+]);
 
-        // End the dialog. This will then return the to the calling dialog.
+// The user message matched /^my name/i
+// This is to catch phrases like "My name is XY."
+bot.dialog('/botname', [
+    function (session) {
+        // Simple text reply back to the user
+        session.send('My name is Bot. I\'m here to show you how IntentDialogs work.');
         session.endDialog();
     }
 ]);

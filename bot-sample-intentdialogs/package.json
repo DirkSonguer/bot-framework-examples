@@ -1,7 +1,7 @@
 {
-  "name": "bot-framework-sample-dialogs",
+  "name": "bot-framework-sample-intentdialogs",
   "version": "1.0.0",
-  "description": "A sample project for the Microsoft Bot Framework to showcase a dialog based bot",
+  "description": "A sample project for the Microsoft Bot Framework to showcase an intent dialog based bot",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

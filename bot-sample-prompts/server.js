@@ -14,7 +14,7 @@
 // If you want a good generic example on how to start with the ms bot
 // framework, you should also have a look at the echobot example from
 // FUSE Labs at Microsoft Research.
-// Link: https://github.com/fuselabs/echobot.
+// Link: https://github.com/fuselabs/echobot
 /* -------------------------------------------------------------------- */
 
 // A live bot needs an app id and the corresponding password to be able
