@@ -109,7 +109,6 @@ bot.dialog('/', [
         builder.Prompts.time(session, "What is todays date and time?");
     },
     function (session, results) {
-        // Acknowledge the 
         // Note that results.response.entity does contain the raw input by
         // the user. If you want a proper date object, use the EntityRecognizer.
         // builder.EntityRecognizer.resolveTime([results.response]);

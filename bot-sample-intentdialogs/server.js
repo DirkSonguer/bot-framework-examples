@@ -2,7 +2,7 @@
 // bot-sample-intentdialogs
 // A simple example for the Microsoft Bot Framework using intent dialogs.
 //
-// This will show you a simple bot that utlisises inten dialogs to
+// This will show you a simple bot that utlisises intent dialogs to
 // understand and guide the user through the conversation. IntendDialogs
 // can be called based on matching the input of the user against
 // regular expressions.
