@@ -15,6 +15,10 @@
 // framework, you should also have a look at the echobot example from
 // FUSE Labs at Microsoft Research.
 // Link: https://github.com/fuselabs/echobot
+//
+// For cards and prompts specifically, the Skype demo app does also
+// features examples for all kinds of use cases and variants.
+// Link: https://github.com/Microsoft/BotBuilder/blob/master/Node/examples/demo-skype/app.js
 /* -------------------------------------------------------------------- */
 
 // A live bot needs an app id and the corresponding password to be able

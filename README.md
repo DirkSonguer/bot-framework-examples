@@ -14,7 +14,7 @@ If you want to know more about these examples, please check: http://randomdev.tu
 
 * _bot-sample-dialogs_: This will show you a simple bot that utlisises dialogs to guide the user
 through the conversation.
-* _bot-sample-intentdialogs_:This will show you a simple bot that utlisises intent dialogs to understand
+* _bot-sample-intentdialogs_: This will show you a simple bot that utlisises intent dialogs to understand
 and guide the user through the conversation. IntendDialogs can be called based on matching the input of
 the user against regular expressions.
 * _bot-sample-prompts_: This will show you a simple bot that interacts with the user via several types
