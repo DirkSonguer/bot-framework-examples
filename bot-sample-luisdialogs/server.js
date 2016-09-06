@@ -1,15 +1,18 @@
 /* -------------------------------------------------------------------- */
-// bot-sample-intentdialogs
-// A simple example for the Microsoft Bot Framework using intent dialogs.
+// bot-sample-luisdialogs
+// A simple example for the Microsoft Bot Framework using LUIS based
+// intent dialogs.
 //
 // This will show you a simple bot that utlisises intent dialogs to
-// understand and guide the user through the conversation. IntendDialogs
-// can be called based on matching the input of the user against
-// regular expressions.
+// understand and guide the user through the conversation. However instead
+// of matching the input of the user against dialogs manually, the LUIS.ai
+// platform is used to extract the intent and optional entities.
 //
 // Author: dirk@songuer.de
 // Link: https://github.com/DirkSonguer/bot-framework-examples
 //
+// Uses: https://www.luis.ai
+// 
 // See https://docs.botframework.com/en-us/node/builder/chat/IntentDialog/
 //
 // If you want a good generic example on how to start with the ms bot
@@ -27,6 +30,7 @@
 if (process.env.NODE_ENV !== 'production') {
     process.env.MICROSOFT_APP_ID = "";
     process.env.MICROSOFT_APP_PASSWORD = "";
+    process.env.LUIS_APP_URL = "";
 }
 
 // Restify provides a REST server. Essentially a bot is just a web
@@ -69,45 +73,29 @@ var bot = new builder.UniversalBot(connector);
 // management page of your bot.
 server.post('/api/messages', connector.listen());
 
-// We use an intent dialog based bot. When the user starts interacting with
-// the bot, the root dialog will be called. With an intent dialog, regular
-// expressions can be defined, which if they match call respective dialogs.
-// onDefault acts as a closure that will be called if none of the defined
-// matches hit.
+// This creates a connection to the LUIS app
+// You need a registered LUIS app on https://www.luis.ai/applicationlist
+// The app url is the one you will get if you publish your LUIS app
+var recognizer = new builder.LuisRecognizer(process.env.LUIS_APP_URL);
+
+// Instead of dialogs, LUIS works with intents
+// you define these within your LUIS app, which will then used
+// as triggers for your app when LUIS identifies them
+var intents = new builder.IntentDialog({ recognizers: [recognizer] });
+
+// Bind all dialogs to intents
+bot.dialog('/', intents);
+
+// This would be an intent defined in your LUIS app called "Welcome",
+// which might listen to utterances like "Hello", "Hi" or similar.
+// Note that the actual dialog behaves exactly like an IntentDialog.
+// Since LUIS is just a preprocessor to manage IntentDialogs you could
+// actually mix & match approaches and use LUIS as well as your own regular
+// expressions if you so choose. 
 // See https://docs.botframework.com/en-us/node/builder/chat/IntentDialog/
-bot.dialog('/', new builder.IntentDialog()
-    .matches(/^hi/i, '/welcome')
-    .matches(/your name/i, '/botname')
-    .matches(/my name/i, '/username')
-    .onDefault(builder.DialogAction.send("I'm sorry, I didn't understand. You can ask me for my name and tell me yours."))
-);
-
-// The user message matched /^hi/i
-bot.dialog('/welcome', [
-    function (session) {
-        // Simple text reply back to the user
-        session.send('Hello.');
-        session.endDialog();
-    }
-]);
-
-// The user message matched /^your name/i
-// This is to catch phrases like "What's your name?"
-bot.dialog('/username', [
-    function (session) {
-
-        // Simple text reply back to the user
-        session.send('Nice to meet you!');
-        session.endDialog();
-    }
-]);
-
-// The user message matched /^my name/i
-// This is to catch phrases like "My name is XY."
-bot.dialog('/botname', [
-    function (session) {
-        // Simple text reply back to the user
-        session.send('My name is Bot. I\'m here to show you how IntentDialogs work.');
-        session.endDialog();
+intents.matches('Welcome', [
+    function (session, args, next) {
+        // show a simple answer
+        session.send("Oh, hello! Nice to see you!");
     }
 ]);
