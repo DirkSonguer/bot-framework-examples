@@ -1,0 +1,24 @@
+{
+  "name": "bot-framework-booking-process",
+  "version": "1.0.0",
+  "description": "This bot will run through a booking dialog as a demo (without any backend integration). It is meant to showcase an end-to-end guided dialog with multiple types of interactions.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/DirkSonguer/bot-framework-examples.git"
+  },
+  "keywords": [
+    "bot",
+    "botframework",
+    "sample"
+  ],
+  "author": "dirk@songuer.de",
+  "license": "MIT",
+  "dependencies": {
+    "botbuilder": "^3.2.3",
+    "restify": "^4.1.1"
+  }
+}

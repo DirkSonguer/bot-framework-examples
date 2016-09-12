@@ -11,9 +11,12 @@
 // Author: dirk@songuer.de
 // Link: https://github.com/DirkSonguer/bot-framework-examples
 //
-// Uses: https://www.luis.ai
+// Uses https://www.luis.ai
+// You can find an introduction to LUIS here:
+// https://docs.botframework.com/en-us/node/builder/guides/understanding-natural-language/
 // 
 // See https://docs.botframework.com/en-us/node/builder/chat/IntentDialog/
+// and https://docs.botframework.com/en-us/node/builder/chat/IntentDialog/#intent-recognizers
 //
 // If you want a good generic example on how to start with the ms bot
 // framework, you should also have a look at the echobot example from
@@ -75,16 +78,23 @@ server.post('/api/messages', connector.listen());
 
 // This creates a connection to the LUIS app
 // You need a registered LUIS app on https://www.luis.ai/applicationlist
-// The app url is the one you will get if you publish your LUIS app
+// The app url is the one you will get if you publish your LUIS app.
 var recognizer = new builder.LuisRecognizer(process.env.LUIS_APP_URL);
 
 // Instead of dialogs, LUIS works with intents
 // you define these within your LUIS app, which will then used
-// as triggers for your app when LUIS identifies them
+// as triggers for your app when LUIS identifies them.
 var intents = new builder.IntentDialog({ recognizers: [recognizer] });
 
 // Bind all dialogs to intents
 bot.dialog('/', intents);
+
+// Default intent for unrecognised intents / requests.
+intents.onDefault([
+    function (session, args, next) {
+        session.send("Sorry, I didn't get that. Can you please try again?");
+    }
+]);
 
 // This would be an intent defined in your LUIS app called "Welcome",
 // which might listen to utterances like "Hello", "Hi" or similar.
