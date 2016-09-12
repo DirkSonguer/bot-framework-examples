@@ -1,7 +1,7 @@
 {
-  "name": "bot-framework-sample-promts",
+  "name": "bot-framework-sample-luisdialogs",
   "version": "1.0.0",
-  "description": "This will show you a simple bot that interacts with the user via several types of promts. Promts are messages by bots, which then wait for user interaction and proceed to the next waterfall step.",
+  "description": "This will show you a simple bot that utilises the LUIS.ai platform to manage its intent dialogs to understand and guide the user through the conversation. LUIS is used to understand the users input and extract the intents and entities from their natural language requests.",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -1,7 +1,7 @@
 {
-  "name": "bot-framework-sample-promts",
+  "name": "bot-framework-booking-process",
   "version": "1.0.0",
-  "description": "This will show you a simple bot that interacts with the user via several types of promts. Promts are messages by bots, which then wait for user interaction and proceed to the next waterfall step.",
+  "description": "This bot will run through a booking dialog as a demo (without any backend integration). It is meant to showcase an end-to-end guided dialog with multiple types of interactions.",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

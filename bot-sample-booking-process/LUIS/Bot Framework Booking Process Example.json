@@ -1,0 +1,82 @@
+{
+  "luis_schema_version": "1.3.0",
+  "name": "Bot Framework Booking Process Example",
+  "desc": "An example that will run through a booking dialog as a demo",
+  "culture": "en-us",
+  "intents": [
+    {
+      "name": "Haircut"
+    },
+    {
+      "name": "None"
+    },
+    {
+      "name": "Welcome"
+    }
+  ],
+  "entities": [],
+  "composites": [],
+  "bing_entities": [
+    "datetime"
+  ],
+  "actions": [],
+  "model_features": [],
+  "regex_features": [],
+  "utterances": [
+    {
+      "text": "hi",
+      "intent": "Welcome",
+      "entities": []
+    },
+    {
+      "text": "hello there",
+      "intent": "Welcome",
+      "entities": []
+    },
+    {
+      "text": "hi there",
+      "intent": "Welcome",
+      "entities": []
+    },
+    {
+      "text": "hello",
+      "intent": "Welcome",
+      "entities": []
+    },
+    {
+      "text": "haircut",
+      "intent": "Haircut",
+      "entities": []
+    },
+    {
+      "text": "haircut on saturday",
+      "intent": "Haircut",
+      "entities": []
+    },
+    {
+      "text": "i want a haircut on sunday",
+      "intent": "Haircut",
+      "entities": []
+    },
+    {
+      "text": "do you have a free slot for a haircut on monday?",
+      "intent": "Haircut",
+      "entities": []
+    },
+    {
+      "text": "hair cut this wednesday",
+      "intent": "Haircut",
+      "entities": []
+    },
+    {
+      "text": "hair cut tomorrow",
+      "intent": "Haircut",
+      "entities": []
+    },
+    {
+      "text": "i want a haircut next week",
+      "intent": "Haircut",
+      "entities": []
+    }
+  ]
+}
